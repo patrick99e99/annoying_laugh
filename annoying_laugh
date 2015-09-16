@@ -1,0 +1,50 @@
+#!/usr/bin/env ruby
+
+class AnnoyingLaugh
+  def self.laugh
+    instance = new
+    while true
+      instance.laugh
+      instance.delay
+    end
+  end
+
+  def laugh
+    body = es_or_as_or_os(10) + hes_or_has_or_hos
+    laugh = start_character_for(body) + body
+    puts laugh
+    `say #{laugh}`
+  end
+
+  def delay
+    sleep random(5)
+  end
+
+  private
+
+  def start_character_for(body)
+    if body.include?('e')
+      ['h','t'].sample
+    else
+      'h'
+    end
+  end
+
+  def es_or_as_or_os(amount)
+    ['e', 'a', 'o'].sample * random(amount, 5)
+  end
+
+  def hes_or_has_or_hos
+    he_or_ha_or_ho * random(5, 0)
+  end
+
+  def he_or_ha_or_ho
+    'h' + (['e', 'a', 'o'].sample * random(3))
+  end
+
+  def random(amount, offset = 0)
+    Random.rand(amount) + offset + 1
+  end
+end
+
+AnnoyingLaugh.laugh
